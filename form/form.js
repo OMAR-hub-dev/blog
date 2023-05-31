@@ -9,13 +9,15 @@ let errors = [];
 form.addEventListener("submit", async event => {
     event.preventDefault();
     const formData = new FormData(form);
+    
     const article = Object.fromEntries(formData.entries());
+    console.log(form); 
     if (formIsValid(article)) {
-      const json = JSON.stringify(article);
+      
       // Nous ferons la requête ici !
       try {
         const json = JSON.stringify(article);
-        const response = await fetch("https://restapi.fr/api/test", {
+        const response = await fetch("https://restapi.fr/api/article", {
           method: "POST",
           body: json,
           headers: {
