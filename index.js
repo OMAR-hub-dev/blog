@@ -17,13 +17,33 @@ const createArticles = (articles)=>{
                         <p class="article-author">${article.author} - ${article.category}</p>
                         <p class="article-content">${article.content}</p>
                         <div class="article-actions">
-                            <button class="btn btn-danger" data-id=${article._id}>Supprimer</button>
+                            <button class="btn btn-danger delete" data-id=${article._id}>Supprimer</button>
                         </div>
                         `;
         return articleDOM;
     });
     articleContainerElement.innerHTML = "";
     articleContainerElement.append(...articlesDOM);
+    // pour supprimmer un article
+    const deletArticle = document.querySelectorAll('.delete');
+    // on parcour ts les boutton supprimmer collectés
+    deletArticle.forEach(delet =>{
+        delet.addEventListener('click', async (e) =>{
+            // on recupere ID du button selection  via dataset
+            const articleId = e.target.dataset.id; 
+            try{
+                const response = await fetch(`https://restapi.fr/api/article/${articleId}`,{
+                    method: "DELETE",
+                })
+                const body = await response.json();
+            }
+            catch(e){
+                console.error("e : ", e);
+            }
+            fetchArticle();
+         }); 
+    })
+ 
 }
 
 const fetchArticle = async ()=>{
@@ -35,7 +55,7 @@ const fetchArticle = async ()=>{
         if (!Array.isArray(articles)) {
         articles = [articles];
         }
-        console.log(articles);
+        // console.log(articles);
         createArticles(articles);
         }
     catch(e){

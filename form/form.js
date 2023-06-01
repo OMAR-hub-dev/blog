@@ -8,14 +8,16 @@ let errors = [];
 
 form.addEventListener("submit", async event => {
     event.preventDefault();
+    // pour recuperer les données du formulaire
     const formData = new FormData(form);
-    
+    // pour les convertir en object
     const article = Object.fromEntries(formData.entries());
-    console.log(form); 
+     console.log(article);
     if (formIsValid(article)) {
       
       // Nous ferons la requête ici !
       try {
+        // convertir en json
         const json = JSON.stringify(article);
         const response = await fetch("https://restapi.fr/api/article", {
           method: "POST",
@@ -25,12 +27,13 @@ form.addEventListener("submit", async event => {
           }
         });
         const body = await response.json();
-        console.log(body);
-      } catch (e) {
-        console.error("e : ", e);
-      }
+        // console.log(body);
+        } catch (e) {
+          console.error("e : ", e);
+        }
       
     }
+    form.reset();
 });
 
 const formIsValid = article => {
