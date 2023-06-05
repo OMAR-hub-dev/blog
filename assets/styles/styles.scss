@@ -31,7 +31,8 @@
       font-size: 4rem;
       font-weight: 700;
     }
-    .menu{
+    .header-menu{
+      position: relative;
       ul {
           @include xs{
             display :none;
@@ -57,12 +58,35 @@
             }
           }
       }
+      .mobile-menu {
+        display: none;
+        position: absolute;
+        box-shadow: var(--box-shadow);
+        top: 9.5rem;
+        right: 1rem;
+        padding: 3rem 1.5rem;
+        width: 20rem;
+        background: white;
+        ul {
+          display: block;
+          li {
+            margin: 2rem 0;
+            a {
+              color: var(--text);
+            }
+          }
+        }
+      }
+      .mobile-menu.open {
+        display: block;
+      }
     
   }
   
   .content {
     grid-area: content;
     padding: 20px;
+    background: var(--divider);
   }
   footer {
     grid-area: footer;

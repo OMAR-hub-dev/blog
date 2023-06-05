@@ -1,6 +1,7 @@
 @import "./assets/styles/media-queries";
 
 .content {
+    background: var(--divider);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,6 +37,7 @@
               }
               .article-content {
                 max-width: 550px;
+                white-space: pre-line;
               }
               .article-actions {
                 width: 100%;
