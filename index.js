@@ -14,9 +14,16 @@ const createArticles = (articles)=>{
                             alt="profile"
                         />
                         <h2>${article.title}</h2>
-                        <p class="article-author">${article.author} - ${article.category}</p>
+                        <p class="article-author">${article.author} -  ${new Date(article.createdAt )
+                                                                        .toLocaleDateString("fr-FR", {
+                                                                                                    weekday: "long",
+                                                                                                    day: "2-digit",
+                                                                                                    month: "long",
+                                                                                                    year: "numeric"
+                                                                                                    })}</p>
                         <p class="article-content">${article.content}</p>
                         <div class="article-actions">
+                            <button class="btn btn-primary" data-id=${article._id} >Modifier</button>
                             <button class="btn btn-danger delete" data-id=${article._id}>Supprimer</button>
                         </div>
                         `;
@@ -24,6 +31,17 @@ const createArticles = (articles)=>{
     });
     articleContainerElement.innerHTML = "";
     articleContainerElement.append(...articlesDOM);
+    // pour edition d'un article
+    const editButtons = document.querySelectorAll('.btn-primary');
+    editButtons.forEach(button =>{
+        button.addEventListener('click',(event)=>{
+            const value = event.target;
+            const articleId = value.dataset.id
+            window.location.assign(`/form.html?id=${articleId}`)
+        });
+    });
+    
+  
     // pour supprimmer un article
     const deletArticle = document.querySelectorAll('.delete');
     // on parcour ts les boutton supprimmer collectés
