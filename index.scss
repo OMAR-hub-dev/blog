@@ -4,11 +4,41 @@
     background: var(--divider);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: 5rem  ;
+    .sidebar{
+      flex: 0 0 25rem ;
+      padding: 0 2rem 2rem 2rem;
+      .categories {
+        padding: 2rem;
+        background: white;
+        border-radius: 0.3rem;
+        box-shadow: var(--box-shadow);
+        li {
+          margin: 1rem;
+          transition: color 0.2s;
+          cursor: pointer;
+          &:hover {
+            color: var(--primary);
+            strong {
+              color: var(--primary);
+            }
+          }
+        }
+        .active{
+          color : var(--primary);
+          font-weight : 600;
+          strong {
+            color: var(--primary);
+          }
+        }
+      }
+    }
     .articles-container {
         max-width: 800px;
-        width: 100%;
-        margin: 5rem 0 10rem 0;
+        flex: 1;
+        padding: 2rem;
+        margin: 0rem 0 10rem 0;
         .article {
             background: white;
             padding: 0 5rem;

@@ -14,6 +14,7 @@ form.addEventListener("submit", async event => {
     const formData = new FormData(form);
     // pour les convertir en object
     const article = Object.fromEntries(formData.entries());
+    
      
     if (formIsValid(article)) {
       
