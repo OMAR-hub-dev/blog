@@ -1,5 +1,5 @@
 import "./assets/styles/styles.scss";
-
+import { openModal } from "./assets/javascript/modal.js";
 import "./index.scss";
 
 const articleContainerElement = document.querySelector(".articles-container");
@@ -64,18 +64,23 @@ const createArticles = ()=>{
     // on parcour ts les boutton supprimmer collectés
     deletArticle.forEach(delet =>{
         delet.addEventListener('click', async (e) =>{
-            // on recupere ID du button selection  via dataset
-            const articleId = e.target.dataset.id; 
-            try{
-                const response = await fetch(`https://restapi.fr/api/article/${articleId}`,{
-                    method: "DELETE",
-                })
-                const body = await response.json();
+            // Nous allons retourner une promesse de notre fonction createModal() et nous allons donc pouvoir utiliser await
+            const result = await openModal("Etes vous sûr de vouloir supprimer votre article ?");
+            if (result){
+                     // on recupere ID du button selection  via dataset
+                        const articleId = e.target.dataset.id; 
+                        try{
+                            const response = await fetch(`https://restapi.fr/api/article/${articleId}`,{
+                                method: "DELETE",
+                            })
+                            const body = await response.json();
+                        }
+                        catch(e){
+                            console.error("e : ", e);
+                        }
+                        fetchArticle();
             }
-            catch(e){
-                console.error("e : ", e);
-            }
-            fetchArticle();
+       
          }); 
     })
  

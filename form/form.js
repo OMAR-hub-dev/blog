@@ -1,5 +1,7 @@
 import "./form.scss";
 import "../assets/styles/styles.scss";
+import { openModal } from "../assets/javascript/modal.js";
+
 
 
 const form = document.querySelector("form");
@@ -100,9 +102,13 @@ const fillArticle = article => {
 };
 
 
-cancelButton.addEventListener("click", ()=>{
+cancelButton.addEventListener("click", async ()=>{
+
+  const result = await openModal("Si vous quittez la page, vous allez perdre votre article");
+  if (result){
   // redirection vers la page index 
   window.location.assign("/index.html")
+  }
 });
 const formIsValid = article => {
   // pour eviter l'affichage  des erreurs répétés on déclare un tableau vide
